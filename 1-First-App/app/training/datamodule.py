@@ -1,7 +1,3 @@
-from torchvision import transforms as transform_lib
-from torchvision.datasets import CIFAR10
-
-
 import os
 from abc import abstractmethod
 from typing import Any, Callable, List, Optional, Union
@@ -9,6 +5,8 @@ from typing import Any, Callable, List, Optional, Union
 import torch
 from pytorch_lightning import LightningDataModule
 from torch.utils.data import DataLoader, Dataset, random_split
+from torchvision import transforms as transform_lib
+from torchvision.datasets import CIFAR10
 from torchvision.transforms import transforms
 
 

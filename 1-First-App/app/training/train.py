@@ -1,17 +1,14 @@
-import os
-
 # import pandas as pd
 # import seaborn as sn
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision
+from datamodule import CIFAR10DataModule
 from pytorch_lightning import LightningModule, Trainer, seed_everything
 from pytorch_lightning.callbacks import LearningRateMonitor
 from torch.optim.lr_scheduler import OneCycleLR
 from torchmetrics.functional import accuracy
-
-from datamodule import CIFAR10DataModule
 
 
 def create_model():
@@ -37,7 +34,7 @@ class LitResnet(LightningModule):
         x, y = batch
         logits = self(x)
         loss = F.nll_loss(logits, y)
-        self.log("train_loss", loss)
+        self.log("train_loss", loss, on_step=True, on_epoch=True)
         return loss
 
     def evaluate(self, batch, stage=None):
@@ -83,7 +80,7 @@ def main():
     datamodule = CIFAR10DataModule(
         data_dir="data",
         batch_size=(256 if torch.cuda.is_available() else 64),
-        num_workers=int(os.cpu_count() / 2),
+        # num_workers=int(os.cpu_count() / 2),
     )
 
     trainer = Trainer(
@@ -93,7 +90,7 @@ def main():
         limit_val_batches=5,
         limit_test_batches=5,
         accelerator="auto",
-        devices=1 if torch.cuda.is_available() else None,  # limiting got iPython runs
+        devices=1 if torch.cuda.is_available() else None,
         callbacks=[LearningRateMonitor(logging_interval="step")],
     )
 
