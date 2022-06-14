@@ -19,6 +19,13 @@ INFO: Your app has started. View it in your browser: http://127.0.0.1:7501/view
 Hello
 ```
 
+For later, we will also need the following packages. Let's install them now:
+
+```commandline
+    pip install pytorch-lightning torchvision torchmetrics
+```
+
+
 ## Getting ready for the cloud
 
 With the installation working locally, let's hop on the cloud. Simply run
