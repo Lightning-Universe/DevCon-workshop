@@ -90,7 +90,8 @@ def main():
         limit_val_batches=5,
         limit_test_batches=5,
         accelerator="auto",
-        devices=1 if torch.cuda.is_available() else None,
+        devices="auto",
+        log_every_n_steps=1,
         callbacks=[LearningRateMonitor(logging_interval="step")],
     )
 
