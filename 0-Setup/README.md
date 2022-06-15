@@ -8,8 +8,8 @@ Follow the [steps in the documentation](https://lightning.ai/lightning-docs/inst
 
 Verify the installation by running the test app in this folder.
 ```commandline
-   cd 0-Setup
-   lightning run app test/app.py
+    cd 0-Setup
+    lightning run app test/app.py
 ```
 
 The output in the terminal should show this:
