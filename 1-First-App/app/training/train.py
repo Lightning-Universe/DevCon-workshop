@@ -11,20 +11,15 @@ from torch.optim.lr_scheduler import OneCycleLR
 from torchmetrics.functional import accuracy
 
 
-def create_model():
-    model = torchvision.models.resnet18(pretrained=False, num_classes=10)
-    model.conv1 = nn.Conv2d(
-        3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
-    )
-    model.maxpool = nn.Identity()
-    return model
-
-
 class LitResnet(LightningModule):
     def __init__(self, lr=0.05, batch_size=64):
         super().__init__()
         self.save_hyperparameters()
-        self.model = create_model()
+        self.model = torchvision.models.resnet18(pretrained=False, num_classes=10)
+        self.model.conv1 = nn.Conv2d(
+            3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        )
+        self.model.maxpool = nn.Identity()
 
     def forward(self, x):
         out = self.model(x)
