@@ -35,7 +35,7 @@ class Net(nn.Module):
 class ImageClassifier(LightningModule):
     def __init__(self, lr=1.0, gamma=0.7, batch_size=32):
         super().__init__()
-        self.save_hyperparameters(ignore="model")
+        self.save_hyperparameters()
         self.model = Net()
         self.test_acc = Accuracy()
 
