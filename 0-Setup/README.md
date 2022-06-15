@@ -8,6 +8,7 @@ Follow the [steps in the documentation](https://lightning.ai/lightning-docs/inst
 
 Verify the installation by running the test app in this folder.
 ```commandline
+   cd 0-Setup
    lightning run app test/app.py
 ```
 
@@ -22,7 +23,7 @@ Hello
 For later, we will also need the following packages. Let's install them now:
 
 ```commandline
-    pip install pytorch-lightning torchvision torchmetrics
+    pip install pytorch-lightning torchvision torchmetrics streamlit
 ```
 
 
