@@ -1,9 +1,10 @@
 import torch
 import torch.nn as nn
-from datamodule import MNISTDataModule
 from pytorch_lightning import LightningModule, Trainer, seed_everything
 from torch.nn import functional as F
 from torchmetrics import Accuracy
+
+from datamodule import MNISTDataModule
 
 
 class Net(nn.Module):
@@ -69,7 +70,13 @@ def main():
     seed_everything(0)
     model = ImageClassifier()
     datamodule = MNISTDataModule(data_dir="data")
-    trainer = Trainer(max_epochs=2)
+    trainer = Trainer(
+        max_epochs=2,
+        num_sanity_val_steps=0,
+        accelerator="auto",
+        devices="auto",
+        log_every_n_steps=1,
+    )
     trainer.fit(model, datamodule)
 
 

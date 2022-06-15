@@ -63,7 +63,7 @@ def train():
 
 class Work(LightningWork):
     def __init__(self, cloud_compute: CloudCompute = CloudCompute(), **kwargs):
-        super().__init__(parallel=True, **kwargs, cloud_compute=cloud_compute)
+        super().__init__(parallel=True, cloud_compute=cloud_compute, **kwargs)
 
     def run(
         self,

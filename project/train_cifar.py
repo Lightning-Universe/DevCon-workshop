@@ -1,14 +1,13 @@
-# import pandas as pd
-# import seaborn as sn
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision
-from datamodule import CIFAR10DataModule
 from pytorch_lightning import LightningModule, Trainer, seed_everything
 from pytorch_lightning.callbacks import LearningRateMonitor
 from torch.optim.lr_scheduler import OneCycleLR
 from torchmetrics.functional import accuracy
+
+from datamodule import CIFAR10DataModule
 
 
 class LitResnet(LightningModule):
@@ -75,7 +74,7 @@ def main():
     datamodule = CIFAR10DataModule(
         data_dir="data",
         batch_size=(256 if torch.cuda.is_available() else 64),
-        # num_workers=int(os.cpu_count() / 2),
+        num_workers=0,
     )
 
     trainer = Trainer(
@@ -92,12 +91,6 @@ def main():
 
     trainer.fit(model, datamodule)
     trainer.test(model, datamodule=datamodule)
-
-    # metrics = pd.read_csv(f"{trainer.logger.log_dir}/metrics.csv")
-    # del metrics["step"]
-    # metrics.set_index("epoch", inplace=True)
-    # display(metrics.dropna(axis=1, how="all").head())
-    # sn.relplot(data=metrics, kind="line")
 
 
 if __name__ == "__main__":
