@@ -5,4 +5,5 @@ from lightning.frontend import StreamlitFrontend
 
 class Main(LightningFlow):
     """TO BE IMPLEMENTED IN THE WORKSHOP"""
+
     pass

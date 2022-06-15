@@ -76,11 +76,15 @@ class Work(LightningWork):
         if dry_run:
             return
 
-        os.environ["PL_TORCH_DISTRIBUTED_BACKEND"] = "gloo"
-        os.environ["MASTER_ADDR"] = main_address
-        os.environ["MASTER_PORT"] = str(main_port)
-        os.environ["NODE_RANK"] = str(rank)
-        os.environ["WORLD_SIZE"] = str(world_size)
+        os.environ.update(
+            {
+                "PL_TORCH_DISTRIBUTED_BACKEND": "gloo",
+                "MASTER_ADDR": main_address,
+                "MASTER_PORT": str(main_port),
+                "NODE_RANK": str(rank),
+                "WORLD_SIZE": str(world_size),
+            }
+        )
 
         train()
 
