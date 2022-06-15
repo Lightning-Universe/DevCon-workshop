@@ -1,11 +1,9 @@
 import os
 
-from lightning import CloudCompute, LightningApp, LightningFlow, LightningWork
-
 import torch
-from torch.utils.data import DataLoader, Dataset
-
+from lightning import CloudCompute, LightningApp, LightningFlow, LightningWork
 from pytorch_lightning import LightningModule, Trainer
+from torch.utils.data import DataLoader, Dataset
 
 
 class RandomDataset(Dataset):
@@ -67,7 +65,14 @@ class Work(LightningWork):
     def __init__(self, cloud_compute: CloudCompute = CloudCompute(), **kwargs):
         super().__init__(parallel=True, **kwargs, cloud_compute=cloud_compute)
 
-    def run(self, main_address="localhost", main_port=1111, world_size=1, rank=0, dry_run=False):
+    def run(
+        self,
+        main_address="localhost",
+        main_port=1111,
+        world_size=1,
+        rank=0,
+        dry_run=False,
+    ):
         if dry_run:
             return
 
@@ -90,8 +95,18 @@ class MultiNodeDemo(LightningFlow):
         self.work0.run(dry_run=True)
 
         if self.work0.internal_ip:
-            self.work0.run(main_address=self.work0.internal_ip, main_port=self.work0.port, world_size=2, rank=0)
-            self.work1.run(main_address=self.work0.internal_ip, main_port=self.work0.port, world_size=2, rank=1)
+            self.work0.run(
+                main_address=self.work0.internal_ip,
+                main_port=self.work0.port,
+                world_size=2,
+                rank=0,
+            )
+            self.work1.run(
+                main_address=self.work0.internal_ip,
+                main_port=self.work0.port,
+                world_size=2,
+                rank=1,
+            )
 
 
 app = LightningApp(MultiNodeDemo())
