@@ -8,8 +8,8 @@ Follow the [steps in the documentation](https://lightning.ai/lightning-docs/inst
 
 Verify the installation by running the test app in this folder.
 ```commandline
-    cd 0-Setup
-    lightning run app test/app.py
+cd 0-Setup
+lightning run app test/app.py
 ```
 
 The output in the terminal should show this:
@@ -23,7 +23,7 @@ Hello
 For later, we will also need the following packages. Let's install them now:
 
 ```commandline
-    pip install pytorch-lightning torchvision torchmetrics streamlit
+pip install pytorch-lightning torchvision torchmetrics streamlit
 ```
 
 
@@ -32,7 +32,7 @@ For later, we will also need the following packages. Let's install them now:
 With the installation working locally, let's hop on the cloud. Simply run
 
 ```commandline
-   lightning run app test/app.py --cloud
+lightning run app test/app.py --cloud
 ```
 
 and a browser window will open. On the first time, you will be asked to create a Lightning AI account. Follow the steps on the screen.

@@ -10,8 +10,8 @@ distributed backend to all train together as a cluster of nodes, seamlessly with
 You can simulate DDP locally to make sure everything works before moving to the cloud:
 
 ```commandline
-    cd 3-Distributed
-    lightning run app app/app.py
+cd 3-Distributed
+lightning run app app/app.py
 ```
 
 The logs should show the following output:
@@ -23,5 +23,5 @@ The logs should show the following output:
 If everything looks as shown here, you are ready to launch in the cloud!
 
 ```commandline
-    lightning run app app/app.py --cloud
+lightning run app app/app.py --cloud
 ```
