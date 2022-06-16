@@ -1,7 +1,7 @@
 import os
 
 from lightning import LightningApp, LightningFlow
-from lightning.frontend.web import StaticWebFrontend
+from lightning.app.frontend.web import StaticWebFrontend
 
 
 class UI(LightningFlow):

@@ -1,5 +1,5 @@
 from lightning import LightningApp, LightningFlow, LightningWork
-from lightning.components.python.popen import PopenPythonScript
+from lightning.app.components.python.popen import PopenPythonScript
 
 
 class Main(LightningFlow):

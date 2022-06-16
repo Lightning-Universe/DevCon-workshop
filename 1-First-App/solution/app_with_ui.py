@@ -1,6 +1,6 @@
 from lightning import LightningApp, LightningFlow, LightningWork
-from lightning.components.python.popen import PopenPythonScript
-from lightning.frontend import StreamlitFrontend
+from lightning.app.components.python.popen import PopenPythonScript
+from lightning.app.frontend import StreamlitFrontend
 
 
 class Main(LightningFlow):
