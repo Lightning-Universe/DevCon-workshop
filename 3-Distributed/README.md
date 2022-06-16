@@ -17,7 +17,9 @@ lightning run app app/app.py
 The logs should show the following output:
 
 ```
-
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/2
+Initializing distributed: GLOBAL_RANK: 1, MEMBER: 2/2
+All distributed processes registered. Starting with 2 processes
 ```
 
 If everything looks as shown here, you are ready to launch in the cloud!
