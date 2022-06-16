@@ -1,7 +1,7 @@
 # The First Training App
 
 
-## Preparaation
+## Preparation
 
 The application we want to write will train a model in the cloud.
 We can make it run any training script we want, but for simplicity we are going to provide the code for you.
