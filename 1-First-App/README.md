@@ -1,6 +1,5 @@
 # The First Training App
 
-
 ## Preparation
 
 The application we want to write will train a model in the cloud.

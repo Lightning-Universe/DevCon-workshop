@@ -2,12 +2,11 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision
+from datamodule import CIFAR10DataModule
 from pytorch_lightning import LightningModule, Trainer, seed_everything
 from pytorch_lightning.callbacks import LearningRateMonitor
 from torch.optim.lr_scheduler import OneCycleLR
 from torchmetrics.functional import accuracy
-
-from datamodule import CIFAR10DataModule
 
 
 class LitResnet(LightningModule):
@@ -15,9 +14,7 @@ class LitResnet(LightningModule):
         super().__init__()
         self.save_hyperparameters()
         self.model = torchvision.models.resnet18(pretrained=False, num_classes=10)
-        self.model.conv1 = nn.Conv2d(
-            3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
-        )
+        self.model.conv1 = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
         self.model.maxpool = nn.Identity()
 
     def forward(self, x):

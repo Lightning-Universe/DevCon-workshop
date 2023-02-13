@@ -1,5 +1,4 @@
 import os
-from abc import abstractmethod
 from typing import Any, Callable, List, Optional, Union
 
 import torch
@@ -59,29 +58,21 @@ class CIFAR10DataModule(LightningDataModule):
         )
 
         if stage == "fit" or stage is None:
-            dataset_train = CIFAR10(
-                self.data_dir, train=True, transform=train_transforms
-            )
-            dataset_val = CIFAR10(
-                self.data_dir, train=True, transform=self.default_transforms()
-            )
+            dataset_train = CIFAR10(self.data_dir, train=True, transform=train_transforms)
+            dataset_val = CIFAR10(self.data_dir, train=True, transform=self.default_transforms())
 
             # Split
             self.dataset_train = self._split_dataset(dataset_train)
             self.dataset_val = self._split_dataset(dataset_val, train=False)
 
         if stage == "test" or stage is None:
-            self.dataset_test = CIFAR10(
-                self.data_dir, train=False, transform=self.default_transforms()
-            )
+            self.dataset_test = CIFAR10(self.data_dir, train=False, transform=self.default_transforms())
 
     def _split_dataset(self, dataset: Dataset, train: bool = True) -> Dataset:
         """Splits the dataset into train and validation set."""
         len_dataset = len(dataset)
         splits = self._get_splits(len_dataset)
-        dataset_train, dataset_val = random_split(
-            dataset, splits, generator=torch.Generator().manual_seed(self.seed)
-        )
+        dataset_train, dataset_val = random_split(dataset, splits, generator=torch.Generator().manual_seed(self.seed))
 
         if train:
             return dataset_train
@@ -103,9 +94,7 @@ class CIFAR10DataModule(LightningDataModule):
 
     def default_transforms(self) -> Callable:
         if self.normalize:
-            cf10_transforms = transform_lib.Compose(
-                [transform_lib.ToTensor(), cifar10_normalization()]
-            )
+            cf10_transforms = transform_lib.Compose([transform_lib.ToTensor(), cifar10_normalization()])
         else:
             cf10_transforms = transform_lib.Compose([transform_lib.ToTensor()])
 
@@ -114,14 +103,10 @@ class CIFAR10DataModule(LightningDataModule):
     def train_dataloader(self, *args: Any, **kwargs: Any) -> DataLoader:
         return self._data_loader(self.dataset_train, shuffle=self.shuffle)
 
-    def val_dataloader(
-        self, *args: Any, **kwargs: Any
-    ) -> Union[DataLoader, List[DataLoader]]:
+    def val_dataloader(self, *args: Any, **kwargs: Any) -> Union[DataLoader, List[DataLoader]]:
         return self._data_loader(self.dataset_val)
 
-    def test_dataloader(
-        self, *args: Any, **kwargs: Any
-    ) -> Union[DataLoader, List[DataLoader]]:
+    def test_dataloader(self, *args: Any, **kwargs: Any) -> Union[DataLoader, List[DataLoader]]:
         return self._data_loader(self.dataset_test)
 
     def _data_loader(self, dataset: Dataset, shuffle: bool = False) -> DataLoader:
@@ -176,14 +161,10 @@ class MNISTDataModule(LightningDataModule):
 
     def setup(self, stage: Optional[str] = None):
         """Split the train and valid dataset."""
-        extra = (
-            dict(transform=self.default_transforms) if self.default_transforms else {}
-        )
+        extra = dict(transform=self.default_transforms) if self.default_transforms else {}
         dataset = MNIST(self.data_dir, train=True, download=False, **extra)
         train_length = len(dataset)
-        self.dataset_train, self.dataset_val = random_split(
-            dataset, [train_length - self.val_split, self.val_split]
-        )
+        self.dataset_train, self.dataset_val = random_split(dataset, [train_length - self.val_split, self.val_split])
 
     def train_dataloader(self):
         """MNIST train set removes a subset to use for validation."""
@@ -211,9 +192,7 @@ class MNISTDataModule(LightningDataModule):
 
     def test_dataloader(self):
         """MNIST test set uses the test split."""
-        extra = (
-            dict(transform=self.default_transforms) if self.default_transforms else {}
-        )
+        extra = dict(transform=self.default_transforms) if self.default_transforms else {}
         dataset = MNIST(self.data_dir, train=False, download=False, **extra)
         loader = DataLoader(
             dataset,
