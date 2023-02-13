@@ -6,7 +6,7 @@ from lightning.app.frontend.web import StaticWebFrontend
 
 class UI(LightningFlow):
     def configure_layout(self):
-        return StaticWebFrontend(os.path.join(os.path.dirname(__file__), f"ui"))
+        return StaticWebFrontend(os.path.join(os.path.dirname(__file__), "ui"))
 
 
 class Main(LightningFlow):

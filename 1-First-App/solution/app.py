@@ -1,4 +1,4 @@
-from lightning import LightningApp, LightningFlow, LightningWork
+from lightning import LightningApp, LightningFlow
 from lightning.app.components.python.popen import PopenPythonScript
 
 

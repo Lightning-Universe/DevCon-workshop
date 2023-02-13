@@ -9,7 +9,6 @@ cp -r project 2-PyTorch-Lightning-App/
 cd 2-PyTorch-Lightning-App
 ```
 
-
 ## The PL App
 
 To generate a brand-new app wrapping your PyTorch Lightning script, run:

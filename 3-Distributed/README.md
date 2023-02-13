@@ -1,9 +1,8 @@
 # Bonus: Multi-node DDP with Lightning
 
 Here we want to quickly tease the experimental features for multi-node distributed LightningWork!
-The code demonstrates how to launch several instances of LightningWork and connecting them through the PyTorch 
+The code demonstrates how to launch several instances of LightningWork and connecting them through the PyTorch
 distributed backend to all train together as a cluster of nodes, seamlessly with ZERO hardware configuration.
-
 
 ## Running the Example
 
